@@ -1,0 +1,90 @@
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\bin\Debug\net6.0\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+C:\Users\ReneDelgado\source\repos\Dalton%20Seguros\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+C:\Users\Usuario\source\repos\Dalton - Seguros marquetin\APISeguros\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+C:\Users\ReneDelgado\source\repos\APISeguros\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+C:\Users\gesch\Documents\Repos Clonados\APISeguros\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+C:\Users\Isaac Corona\Documents\Development\Dalton\APISeguros\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
+G:\.NET\Library\DaltORM\bin\Debug\net6.0\DaltORM.deps.json
+G:\.NET\Library\DaltORM\bin\Debug\net6.0\DaltORM.dll
+G:\.NET\Library\DaltORM\bin\Debug\net6.0\DaltORM.pdb
+G:\.NET\Library\DaltORM\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
+G:\.NET\Library\DaltORM\bin\Debug\net6.0\MySql.Data.dll
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.csproj.AssemblyReference.cache
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfoInputs.cache
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.AssemblyInfo.cs
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CoreCompileInputs.cache
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.csproj.CopyComplete
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.dll
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\refint\DaltORM.dll
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\DaltORM.pdb
+G:\.NET\Library\DaltORM\obj\Debug\net6.0\ref\DaltORM.dll
