@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DaltORM.PropertyClass
+﻿namespace Dalton.Utility.Global.DaltORM.PropertyClass
 {
-  [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
   public class BelongToDatabase : Attribute
   {
 	public string DatabaseName { get; }

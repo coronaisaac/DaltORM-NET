@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DaltORM.Class
+﻿namespace Dalton.Utility.Global.DaltORM.Class
 {
-  class PropertySQL
+	class PropertySQL
   {
 	private int _column_id;
 	private string _column_name;

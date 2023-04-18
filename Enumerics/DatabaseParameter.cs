@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaltORM.Enumerics
+namespace Dalton.Utility.Global.DaltORM.Enumerics
 {
   public enum DatabaseTypes
   {

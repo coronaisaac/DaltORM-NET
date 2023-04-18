@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
-namespace DaltORM
+namespace Dalton.Utility.Global.DaltORM
 {
-  public class RegEx
+	public class RegEx
   {
     public static bool IsTrue(string texto, string expresionRegular)
     {

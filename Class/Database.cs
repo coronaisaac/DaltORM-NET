@@ -1,19 +1,14 @@
-﻿using DaltORM.Class;
-using DaltORM.Enumerics;
+﻿using Dalton.Utility.Global.DaltORM.Class;
+using Dalton.Utility.Global.DaltORM.Enumerics;
+using Dalton.Utility.Global.DaltORM.IDatabases;
+using Dalton.Utility.Global.DaltORM.Interfaces;
 using DaltORM.IDatabases;
-using DaltORM.Interfaces;
-using DaltORM.PropertyClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DaltORM
+namespace Dalton.Utility.Global.DaltORM
 {
-  public struct DataConnection
+    public struct DataConnection
   {
     public string Server;
     public int Port;

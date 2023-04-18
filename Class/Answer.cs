@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DaltORM
+﻿namespace Dalton.Utility.Global.DaltORM
 {
-  public class Answer
+	public class Answer
   {
 	private bool _valid;
 	private string _message;

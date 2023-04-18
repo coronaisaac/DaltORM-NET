@@ -1,0 +1,11 @@
+G:\.NET\Library\DaltORM\Build\DaltORM.dll
+G:\.NET\Library\DaltORM\Build\DaltORM.deps.json
+G:\.NET\Library\DaltORM\Build\DaltORM.pdb
+G:\.NET\Library\DaltORM\Build\System.Data.SqlClient.dll
+G:\.NET\Library\DaltORM\Build\runtimes\win-arm64\native\sni.dll
+G:\.NET\Library\DaltORM\Build\runtimes\win-x64\native\sni.dll
+G:\.NET\Library\DaltORM\Build\runtimes\win-x86\native\sni.dll
+G:\.NET\Library\DaltORM\Build\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+G:\.NET\Library\DaltORM\Build\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+G:\.NET\Library\DaltORM\Build\FirebirdSql.Data.FirebirdClient.dll
+G:\.NET\Library\DaltORM\Build\MySql.Data.dll

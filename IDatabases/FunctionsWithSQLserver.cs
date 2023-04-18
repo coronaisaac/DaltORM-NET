@@ -1,22 +1,20 @@
 ﻿
-using DaltORM.Class;
-using DaltORM.Interfaces;
-using DaltORM.PropertyClass;
-using System;
-using System.Collections.Generic;
+using AutoMapper;
+using Dalton.Utility.Global.DaltORM.Class;
+using Dalton.Utility.Global.DaltORM.Interfaces;
+using Dalton.Utility.Global.DaltORM.PropertyClass;
+using Dalton.Utility.Global.Logs;
+using Microsoft.Data.SqlClient;
+using OfficeOpenXml.Drawing.Chart;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using static DaltORM.Database;
 
-namespace DaltORM.IDatabases
+namespace Dalton.Utility.Global.DaltORM.IDatabases
 {
-  public class FunctionsWithSQLserver : IDatabase
+    public class FunctionsWithSQLserver : IDatabase
   {
     /***********************************************************/
     /* INICIAN CONEXION DE BASE DE DATOS ***********************/
@@ -25,9 +23,7 @@ namespace DaltORM.IDatabases
     private DataConnection InfoConnection { get; set; }
     private string InfoConnectionString { get; set; }
     private SqlConnection oConnection { get; set; }
-    private Assembly[] assemblies { get; set; }
     private bool createForeingKey { get; set; }
-
     private string GetConnectionString()
     {
       string sConnectionString = String.Empty;
@@ -41,40 +37,24 @@ namespace DaltORM.IDatabases
 
       return sConnectionString;
     }
-
-    //private string finalQueryOpcion = " OPTION(ROBUST PLAN, KEEP PLAN);";
-
-    //private string withNoLockTable = " WITH (NOLOCK) ";
-
-
     public FunctionsWithSQLserver(DataConnection oDataConnection)
     {
-      this.InfoConnection = oDataConnection;
-      this.createForeingKey = false;
+          this.InfoConnection = oDataConnection;
+          this.createForeingKey = false;
     }
-    
     public FunctionsWithSQLserver(string connectionString)
     {
         this.InfoConnectionString = connectionString;
         this.createForeingKey = false;
     }
-
-        //public FunctionsWithSQLserver(DataConnection oDataConnection, params Assembly[] oAssemblies)
-        //{
-        //  this.InfoConnection = oDataConnection;
-        //  this.createForeingKey = false;
-        //  //this.assemblies = oAssemblies;
-        //}
-
-        public bool CreateConnection()
+    public bool CreateConnection()
     {
       string sqlcon =  (String.IsNullOrEmpty(InfoConnection.User) && String.IsNullOrEmpty(InfoConnection.Database) && String.IsNullOrEmpty(InfoConnection.Password)) ? InfoConnectionString : GetConnectionString();
       this.oConnection = new SqlConnection(sqlcon);
       if (oConnection != null) return true;
       return false;
     }
-   
-        public void OpenConnection()
+    public void OpenConnection()
     {
       this.oConnection.Open();
       if (oConnection.State != System.Data.ConnectionState.Open)
@@ -113,7 +93,7 @@ namespace DaltORM.IDatabases
       try
       {
         Type type = typeof(T);
-        MethodInfo method = type.GetMethod("SetDatabaseName", BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance);
+        MethodInfo? method = type.GetMethod("SetDatabaseName", BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance);
         if (method != null)
         {
           method.Invoke(oData, new object[] { oConnection.Database });
@@ -125,152 +105,86 @@ namespace DaltORM.IDatabases
         return false;
       }
     }
-
-
-
     /***********************************************************/
     /* EJECUTAN CONSULTAS EN BASE DE DATOS *********************/
     /***********************************************************/
-
     public List<T> ExecuteQuery<T>(string query)
-    {
-      List<T> rs = new List<T>();
-      SqlCommand oComando = new SqlCommand(query, oConnection);
-      oComando.CommandTimeout = 20000;
-      using (SqlDataReader reader = oComando.ExecuteReader())
-      {
-        if (reader.HasRows)
         {
-          while (reader.Read())
-          {
-            Type type = typeof(T);
-            if (reader.FieldCount == 1)
+            List<T> rs = new List<T>();
+            SqlCommand oComando = new SqlCommand(query, oConnection);
+            oComando.CommandTimeout = 20000;
+            using (SqlDataReader reader = oComando.ExecuteReader())
             {
-              object value = reader.GetValue(0);
-              if (value != DBNull.Value)
-              {
-                rs.Add((T)value);
-              }
-            }
-            else
-            {
-              T reg = (T)Activator.CreateInstance(type);
-              for (int i = 0; i < reader.FieldCount; i++)
-              {
-                if (reader.GetValue(i) != DBNull.Value)
+                if (reader.HasRows)
                 {
-                  string name = reader.GetName(i);
-                  if (name != null)
-                  {
-                    PropertyInfo property = type.GetProperty(name);
-                    if (property != null)
+                    var config = new MapperConfiguration(cfg =>
                     {
-                      Type pType = property.PropertyType;
-                      if (pType.FullName == "System.Boolean")
-                      {
-                        object obj = reader.GetValue(i);
-                        switch (obj)
-                        {
-                          case 1:
-                            property.SetValue((object)reg, true);
-                            break;
-                          case 0:
-                            property.SetValue((object)reg, false);
-                            break;
-                          case true:
-                            property.SetValue((object)reg, true);
-                            break;
-                          case false:
-                            property.SetValue((object)reg, false);
-                            break;
-                          default:
-                            throw new ArgumentException("Can't cast value boolean");
-                        }
-                      }
-                      else
-                      {
-                        property.SetValue((object)reg, reader.GetValue(i));
-                      }
+                        cfg.CreateMap<IDataRecord, T>();
+                    });
+                    var mapper = config.CreateMapper();
+                    while (reader.Read())
+                    {
+                        var record = (IDataRecord)reader;
+                        var reg = mapper.Map<T>(record);
+                        rs.Add(reg);
                     }
-                  }
                 }
-              }
-              rs.Add(reg);
             }
-          }
+            return rs;
         }
-      }
-      return rs;
-    }
     private List<object> ExecuteQuery(string query, Type type)
-    {
-      List<object> rs = new List<object>();
-      using (SqlCommand oComando = new SqlCommand(query, oConnection))
-      {
-        oComando.CommandTimeout = 240000;
-        using (SqlDataReader reader = oComando.ExecuteReader())
         {
-          if (reader.HasRows)
-          {
-            while (reader.Read())
+            var rs = new List<object>();
+
+            using (var oComando = new SqlCommand(query, oConnection))
             {
-              //Type type = typeof(T);
-              if (reader.FieldCount == 1)
-              {
-                object value = reader.GetValue(0);
-                rs.Add((object)value);
-              }
-              else
-              {
-                var reg = Activator.CreateInstance(type);
-                for (int i = 0; i < reader.FieldCount; i++)
+                oComando.CommandTimeout = 240000;
+
+                using (var reader = oComando.ExecuteReader())
                 {
-                  if (reader.GetValue(i) != DBNull.Value)
-                  {
-                    string name = reader.GetName(i);
-                    if (name != null)
+                    if (!reader.HasRows) return rs;
+
+                    var properties = type.GetProperties().ToDictionary(p => p.Name);
+
+                    while (reader.Read())
                     {
-                      PropertyInfo property = type.GetProperty(name);
-                      if (property != null)
-                      {
-                        Type pType = property.PropertyType;
-                        if (pType.FullName == "System.Boolean")
+                        if (reader.FieldCount == 1)
                         {
-                          object obj = reader.GetValue(i);
-                          switch (obj)
-                          {
-                            case 1:
-                              property.SetValue((object)reg, true);
-                              break;
-                            case 0:
-                              property.SetValue((object)reg, false);
-                              break;
-                            case true:
-                              property.SetValue((object)reg, true);
-                              break;
-                            case false:
-                              property.SetValue((object)reg, false);
-                              break;
-                            default:
-                              throw new ArgumentException("Can't cast value boolean");
-                          }
+                            rs.Add(reader.GetValue(0));
                         }
                         else
                         {
-                          property.SetValue(reg, reader.GetValue(i));
+                            var reg = Activator.CreateInstance(type);
+
+                            for (var i = 0; i < reader.FieldCount; i++)
+                            {
+                                var name = reader.GetName(i);
+
+                                if (!properties.TryGetValue(name, out var property)) continue;
+
+                                var value = reader.GetValue(i);
+
+                                if (value == DBNull.Value) continue;
+
+                                if (property.PropertyType == typeof(bool))
+                                {
+                                    var boolValue = Convert.ToBoolean(value);
+                                    property.SetValue(reg, boolValue);
+                                }
+                                else
+                                {
+                                    property.SetValue(reg, value);
+                                }
+                            }
+
+                            rs.Add(reg);
                         }
-                      }
                     }
-                  }
                 }
-                rs.Add(reg);
-              }
             }
-          }
+
+            return rs;
         }
-      }
-      return rs;
-    }
     public bool ExecuteQuery(string query)
     {
       int affects = 0;
@@ -315,13 +229,11 @@ namespace DaltORM.IDatabases
       sqlTransac.Commit();
       sqlTransac.Dispose();
     }
-
     //PARAMETROS PARA CREAR UNA TABLA
     public void ForeingKeysInCreate(bool isCreate)
     {
       createForeingKey = isCreate;
     }
-
     // CREA QUERY PARA CREAR LA TABLA
     public bool ExistModel<T>()
     {
@@ -340,7 +252,6 @@ namespace DaltORM.IDatabases
     {
       return ExecuteQuery(getCreateQuery<T>(oData));
     }
-
     //CREA QUERY Y EJECUTA PARA GUARDAR DATOS EN TABLA DE UNA CLASE
     public bool Save<T>(object oData)
     {
@@ -455,7 +366,6 @@ namespace DaltORM.IDatabases
       }
       return ExecuteQuery(getSaveQuery<T>(oData, list));
     }
-
     public bool SaveOrUpdate<T>(ref object oData)
     {
       Type type = typeof(T);
@@ -576,7 +486,6 @@ namespace DaltORM.IDatabases
       }
       return true;
     }
-
     //ACTUALIZA DATOS EN DE UNA CLASE EN SU TABLA
     public bool Update<T>(object oData)
     {
@@ -606,21 +515,17 @@ namespace DaltORM.IDatabases
       bool result = ExecuteQuery(getUpdateQuery<T>(oData, list));
       return result;
     }
-
     //BORRA EL REGISTRO DE LA CLASE POR SUS LLAVES PRIMARIAS Y BORRA EN LA BASE DE DATOS
     public bool Delete<T>(object oData, int limiteSelect = 0)
     {
       bool result = ExecuteQuery(getDeleteQuery<T>(oData, limiteSelect));
       return result;
     }
-
     //ACTUALIZA EL OBJETO CONSULTANDOLO A LA BASE DE DATOS
     public T Reload<T>(object oData)
     {
       throw new NotImplementedException();
     }
-
-
     //METODOS QUE CONSTRUYEN UNA CONSULTA ESPECIAL
     public List<T> Get<T>(string Statement1, string Statement2, int level = 0, object oData = null, bool LoadObjAvalible = false, int limiteSelect = 0)
     {
@@ -772,8 +677,6 @@ namespace DaltORM.IDatabases
     {
       return new Where<T>(" Where ( " + createWhereClause<T>(expression), " Where ( " + createWhereClauseV2<T>(expression), oData, limiteSelect);
     }
-
-
     public bool VerifyFields<T>()
     {
       if (ExistModel<T>())
@@ -1031,8 +934,6 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
       }
       return true;
     }
-
-
     public bool ExecuteStoredProcedure<T>(ref object oData)
     {
       Type type = typeof(T);
@@ -1060,27 +961,13 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
           oList.Add("@" + oField.Name, oProperty.Name);
           SqlParameter oSqlParameter = new SqlParameter();
           oSqlParameter.ParameterName = "@" + oField.Name;
-          var nullProperty = Nullable.GetUnderlyingType(oProperty.PropertyType);
-          string propertyType = nullProperty == null? oProperty.PropertyType.Name : nullProperty.Name;
-          switch (propertyType)
-          {
-            case "Byte[]": oSqlParameter.SqlDbType = SqlDbType.VarBinary; break;
-            case "Int": oSqlParameter.SqlDbType = SqlDbType.Int; break;
-            case "String": oSqlParameter.SqlDbType = SqlDbType.VarChar; break;
-            case "Decimal": oSqlParameter.SqlDbType = SqlDbType.Decimal; break;
-            case "DateTime": oSqlParameter.SqlDbType = SqlDbType.DateTime; break;
-            case "Float": oSqlParameter.SqlDbType = SqlDbType.Float; break;
-            case "Boolean": oSqlParameter.SqlDbType = SqlDbType.Bit; break;
-            case "Numeric": oSqlParameter.SqlDbType = SqlDbType.Money; break;
-            case "Xml": oSqlParameter.SqlDbType = SqlDbType.Xml; break;
-          }
+          oSqlParameter.SqlDbType = GetSqlDbType(oProperty.PropertyType);
           oSqlParameter.Direction = oField.Direction;
           oSqlParameter.Value = oProperty.GetValue(oData);
-          if (oSqlParameter.Value == null) oSqlParameter.Value = DBNull.Value;
-          if (oSqlParameter.Size == 0 && oField.Value1 != 0)
-          {
-              oSqlParameter.Size = oField.Value1;
-          }
+          if (oSqlParameter.Value == null) 
+                        oSqlParameter.Value = DBNull.Value;
+          if (oSqlParameter.Size == 0 && oField.Value1 != 0) 
+                        oSqlParameter.Size = oField.Value1;
           oComando.Parameters.Add(oSqlParameter);
         }
         //throw new ArgumentException("Field custom attribute not sould be null!.");
@@ -1093,133 +980,138 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
         {
           string nameProperty = oList[oParameter.ParameterName];
           PropertyInfo againProperty = type.GetProperty(nameProperty);
-          againProperty.SetValue(oData, oParameter.Value);
+          againProperty.SetValue(oData, String.IsNullOrEmpty(oParameter.Value.ToString()) ? "" :  oParameter.Value);
         }
       }
       return affect > 0 ? true : false;
     }
     public List<Result> ExecuteStoredProcedure<T, Result>(ref object oData)
     {
-      Type type = typeof(T);
-      StoredProcedure oStoredProcedure = getCustomAttribute<StoredProcedure>(type);
-      if (oStoredProcedure == null) throw new ArgumentException("StoredProcedure custom attribute not sould be null!.");
+        Type type = typeof(T);
+        StoredProcedure oStoredProcedure = getCustomAttribute<StoredProcedure>(type) ?? throw new ArgumentException("StoredProcedure custom attribute not found.");
 
-      SqlCommand oComando = new SqlCommand(oStoredProcedure.Name, oConnection);
-      oComando.CommandTimeout = 240000;
-      oComando.CommandType = System.Data.CommandType.StoredProcedure;
-
-      Dictionary<string, string> oList = new Dictionary<string, string>();
-
-      foreach (PropertyInfo oProperty in type.GetProperties())
-      {
-        Field oField = getCustomAttribute<Field>(oProperty);
-        if (oField == null) throw new ArgumentException("Field custom attribute not sould be null!.");
-        oList.Add("@" + oField.Name, oProperty.Name);
-
-        SqlParameter oSqlParameter = new SqlParameter();
-        oSqlParameter.ParameterName = "@" + oField.Name;
-        var nullProperty = Nullable.GetUnderlyingType(oProperty.PropertyType);
-        string propertyType = nullProperty == null ? oProperty.PropertyType.Name : nullProperty.Name;
-        switch (propertyType)
+        SqlCommand oComando = new SqlCommand(oStoredProcedure.Name, oConnection)
         {
-          case "Int": oSqlParameter.SqlDbType = SqlDbType.Int; break;
-          case "String": oSqlParameter.SqlDbType = SqlDbType.VarChar; break;
-          case "Decimal": oSqlParameter.SqlDbType = SqlDbType.Decimal; break;
-          case "DateTime": oSqlParameter.SqlDbType = SqlDbType.DateTime; break;
-          case "Float": oSqlParameter.SqlDbType = SqlDbType.Float; break;
-          case "Boolean": oSqlParameter.SqlDbType = SqlDbType.Bit; break;
-          case "Numeric": oSqlParameter.SqlDbType = SqlDbType.Money; break;
-          case "Xml": oSqlParameter.SqlDbType = SqlDbType.Xml; break;
-        }
+            CommandTimeout = 240000,
+            CommandType = CommandType.StoredProcedure
+        };
 
-        oSqlParameter.Direction = oField.Direction;
-        oSqlParameter.Value = oProperty.GetValue(oData);
-        if (oSqlParameter.Value == null) oSqlParameter.Value = DBNull.Value;
-        if (oSqlParameter.Size == 0 && oField.Value1!=0) {
-            oSqlParameter.Size = oField.Value1;
-        }
-        oComando.Parameters.Add(oSqlParameter);
-      }
-      List<Result> rs = new List<Result>();
-      using (SqlDataReader reader = oComando.ExecuteReader())
-      {
-        Type typers = typeof(Result);
+        Dictionary<string, string> oList = new Dictionary<string, string>();
 
-        if (reader.HasRows)
+        foreach (PropertyInfo oProperty in type.GetProperties())
         {
-          while (reader.Read())
-          {
-            if (reader.FieldCount == 1)
-            {
-              object value = reader.GetValue(0);
-              if (!String.IsNullOrEmpty(value.ToString())) rs.Add((Result)value);
+            Field oField = getCustomAttribute<Field>(oProperty) ?? throw new ArgumentException("Field custom attribute not found.");
+            oList.Add("@" + oField.Name, oProperty.Name);
 
-             }
-            else
+            SqlParameter oSqlParameter = new SqlParameter("@" + oField.Name, GetSqlDbType(oProperty.PropertyType))
             {
-              Result reg = (Result)Activator.CreateInstance(typers);
-              for (int i = 0; i < reader.FieldCount; i++)
-              {
-                if (reader.GetValue(i) != DBNull.Value)
+                Direction = oField.Direction,
+                Value = oProperty.GetValue(oData) ?? DBNull.Value
+            };
+            oSqlParameter.Size = (oSqlParameter.Size == 0 && oField.Value1 != 0) ? oField.Value1 : oSqlParameter.Size;
+            oComando.Parameters.Add(oSqlParameter);
+        }
+        List<Result> rs = new List<Result>();
+        using (SqlDataReader reader = oComando.ExecuteReader())
+        {
+            Type typers = typeof(Result);
+
+            while (reader.Read())
+            {
+                if (reader.FieldCount == 1)
                 {
-                  string name = reader.GetName(i);
-                  if (name != null)
-                  {
-                    PropertyInfo property = typers.GetProperty(name);
-                    if (property != null)
+                    object value = reader.GetValue(0);
+                    if (!String.IsNullOrEmpty(value.ToString()))
                     {
-                      Type pType = property.PropertyType;
-                      if (pType.FullName == "System.Boolean")
-                      {
-                        object obj = reader.GetValue(i);
-                        switch (obj)
-                        {
-                          case 1:
-                            property.SetValue((object)reg, true);
-                            break;
-                          case 0:
-                            property.SetValue((object)reg, false);
-                            break;
-                          case true:
-                            property.SetValue((object)reg, true);
-                            break;
-                          case false:
-                            property.SetValue((object)reg, false);
-                            break;
-                          default:
-                            throw new ArgumentException("Can't cast value boolean");
-                        }
-                      }
-                      else
-                      {
-                        property.SetValue((object)reg, reader.GetValue(i));
-                      }
+                        rs.Add((Result)value);
                     }
-                  }
                 }
-              }
-              rs.Add(reg);
+                else
+                {
+                    Result reg = (Result)Activator.CreateInstance(typers);
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        if (reader.GetValue(i) != DBNull.Value)
+                        {
+                            string name = reader.GetName(i);
+
+                            if (name != null)
+                            {
+                                PropertyInfo property = typers.GetProperty(name);
+
+                                if (property != null)
+                                {
+                                    object obj = reader.GetValue(i);
+
+                                    if (property.PropertyType == typeof(bool))
+                                    {
+                                        switch (obj)
+                                        {
+                                            case 1:
+                                            case true:
+                                                property.SetValue(reg, true);
+                                                break;
+                                            case 0:
+                                            case false:
+                                                property.SetValue(reg, false);
+                                                break;
+                                            default:
+                                                throw new ArgumentException("Can't cast value to boolean");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        property.SetValue(reg, obj);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    rs.Add(reg);
+                }
             }
-          }
         }
-      }
 
-      foreach (SqlParameter oParameter in oComando.Parameters)
-      {
-        if (oParameter.Direction == ParameterDirection.Output)
+        foreach (SqlParameter oParameter in oComando.Parameters)
         {
-          PropertyInfo againProperty = type.GetProperty(oParameter.ParameterName.Remove(0,1));
-          againProperty.SetValue(oData, oParameter.Value);
+            if (oParameter.Direction == ParameterDirection.Output)
+            {
+                PropertyInfo againProperty = type.GetProperty(oParameter.ParameterName.Remove(0, 1));
+                againProperty.SetValue(oData, oParameter.Value);
+            }
         }
-      }
-      return rs;
+
+        return rs;
     }
+    private SqlDbType GetSqlDbType(Type propertyType)
+    {
+        var nullProperty = Nullable.GetUnderlyingType(propertyType);
+        string typeName = nullProperty == null ? propertyType.Name : nullProperty.Name;
 
-
+        switch (typeName)
+        {
+            case "Int32":
+                return SqlDbType.Int;
+            case "String":
+                return SqlDbType.VarChar;
+            case "Decimal":
+                return SqlDbType.Decimal;
+            case "DateTime":
+                return SqlDbType.DateTime;
+            case "Single":
+                return SqlDbType.Float;
+            case "Boolean":
+                return SqlDbType.Bit;
+            case "Xml":
+                return SqlDbType.Xml;
+            default:
+                return SqlDbType.VarChar;
+        }
+    }
     /***********************************************************/
     /* CREAN CONSULTAS EN BASE DE DATOS, Y METODOS DE APOYO ****/
     /***********************************************************/
-
     private List<T> ExecuteQueryWithLevels<T>(string query, Dictionary<string, string> indice)
     {
       Type type = typeof(T);
@@ -2460,47 +2352,6 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
           .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
           .ToArray();
     }
-
-
-    //private Type getTypeByName(string name)
-    //{
-    //  List<Type> oTypesAssemblies = new List<Type>();
-    //  foreach (Assembly oAssembly in assemblies)
-    //  {
-    //	List<Type> oTypesAssembly = oAssembly.GetTypes().Where(t => String.Equals(t.Name, name, StringComparison.Ordinal)).ToList();
-    //	oTypesAssemblies.AddRange(oTypesAssembly);
-    //  }
-    //  return oTypesAssemblies.Count == 1 ? oTypesAssemblies.FirstOrDefault() : null;
-    //}
-
-
-    //private Type getTypeByAttributeName(string name)
-    //{
-    //  List<Type> oTypesAssemblies = new List<Type>();
-    //  foreach (Assembly oAssembly in assemblies)
-    //  {
-    //	foreach (Type type in oAssembly.GetTypes())
-    //	{
-    //	  if (type.GetCustomAttributes(true).FirstOrDefault() != null)
-    //	  {
-    //		DbTable Attribute = type.GetCustomAttributes(true).FirstOrDefault().GetType() == typeof(DbTable) ?
-    //						type.GetCustomAttributes(true).FirstOrDefault() as DbTable : null;
-    //		if (Attribute != null)
-    //		{
-    //		  if (Attribute.Name == name)
-    //		  {
-    //			oTypesAssemblies.Add(type);
-    //		  }
-    //		}
-    //	  }
-    //	}
-    //	//List<Type> oTypesAssembly = oAssembly.GetTypes().Where(t => String.Equals(t.GetCustomAttributes(typeof(Table), true).FirstOrDefault().GetType().Name, name, StringComparison.Ordinal)).ToList();
-    //	//oTypesAssemblies.AddRange(oTypesAssembly);
-    //  }
-    //  return oTypesAssemblies.Count >= 1 ? oTypesAssemblies.FirstOrDefault() : null;
-    //}
-
-
     private PropertyInfo getPropertyFromPathHeader(string pathHeader, Type oType)
     {
       List<string> listClasses = pathHeader.Split('$').ToList();
@@ -2773,8 +2624,6 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
       List<object> Attribute = typeof(O).GetCustomAttributes(typeof(P), true).ToList();
       return Attribute as List<P>;
     }
-
-
     /// <summary>
     /// Retrieves the collection element type from this type
     /// </summary>
@@ -2833,7 +2682,6 @@ left join sys.types as t on col.user_type_id = t.user_type_id where tab.name lik
         return typeof(object);
       return null;
     }
-
     private List<string> getListMissingFields<T>()
     {
       DbTable oTable = getCustomAttribute<DbTable, T>();

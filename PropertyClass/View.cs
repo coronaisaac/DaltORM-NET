@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaltORM.PropertyClass
+namespace Dalton.Utility.Global.DaltORM.PropertyClass
 {
   [AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
   public class DbView : Attribute

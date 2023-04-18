@@ -1,13 +1,8 @@
-﻿using DaltORM.Enumerics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dalton.Utility.Global.DaltORM.Enumerics;
 
-namespace DaltORM.PropertyClass
+namespace Dalton.Utility.Global.DaltORM.PropertyClass
 {
-  [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
   public class BelongsTo : Attribute
   {
     public string Name { get; }

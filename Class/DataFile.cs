@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using DaltORM;
 
-namespace DaltORM
+namespace Dalton.Utility.Global.DaltORM
 {
-  public class DataFile
+    public class DataFile
   {
     private string pathfile { get; set; }
 

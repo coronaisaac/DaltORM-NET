@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DaltORM.PropertyClass
+﻿namespace Dalton.Utility.Global.DaltORM.PropertyClass
 {
-  [AttributeUsage(AttributeTargets.Class)]
+	[AttributeUsage(AttributeTargets.Class)]
   public class UseDatabase : Attribute
   {
 	private List<string> _dbnames;

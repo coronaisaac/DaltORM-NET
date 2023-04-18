@@ -1,21 +1,15 @@
-﻿using DaltORM.Interfaces;
-using MySql.Data.MySqlClient;
-using DaltORM.PropertyClass;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using MySql.Data.MySqlClient;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 //using System.Windows.Forms;
-using static DaltORM.Database;
 using System.Linq.Expressions;
-using DaltORM.Class;
+using Dalton.Utility.Global.DaltORM.Class;
+using Dalton.Utility.Global.DaltORM.Interfaces;
+using Dalton.Utility.Global.DaltORM;
+using Dalton.Utility.Global.DaltORM.PropertyClass;
 
 namespace DaltORM.IDatabases
 {
-  public class FunctionWithMySQL : IDatabase
+    public class FunctionWithMySQL : IDatabase
   {
     private DataConnection InfoConnection { get; set; }
     private string InfoConnectionString { get; set; }

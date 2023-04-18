@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Dalton.Utility.Global.DaltORM.Class;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DaltORM.Class
+namespace Dalton.Utility.Global.DaltORM.Class
 {
-  public class Equal<T> : Database
+    public class Equal<T> : Database
   {
     private string _Statement1;
     private string _Statement2;

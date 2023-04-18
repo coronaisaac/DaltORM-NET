@@ -1,15 +1,13 @@
-﻿using DaltORM.Class;
-using DaltORM.Interfaces;
+﻿using Dalton.Utility.Global.DaltORM;
+using Dalton.Utility.Global.DaltORM.Interfaces;
+using Dalton.Utility.Global.DaltORM.Class;
 using FirebirdSql.Data.FirebirdClient;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using static DaltORM.Database;
 
 namespace DaltORM.IDatabases
 {
-  public class FunctionWithFirebird : IDatabase
+    public class FunctionWithFirebird : IDatabase
   {
     private DataConnection InfoConnection { get; set; }
     private string InfoConnectionString { get; set; }
@@ -70,7 +68,7 @@ namespace DaltORM.IDatabases
           while(reader.Read())
           {
             Type type = typeof(T);
-            T reg = (T)Activator.CreateInstance(type);
+            T? reg = (T)Activator.CreateInstance(type);
             for(int i = 0; i < reader.FieldCount; i++)
             {
               if(reader.GetValue(i) != DBNull.Value)

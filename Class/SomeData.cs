@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
+﻿using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace DaltORM
+namespace Dalton.Utility.Global.DaltORM
 {
-  public class SomeData
+	public class SomeData
   {
 	private static string key = "ABCDEFGHIJKLMÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz";
     private string GenerateSerieWithDate(DateTime oDate)
@@ -312,7 +307,7 @@ namespace DaltORM
 	  //se llama a las clases que tienen los algoritmos
 	  //de encriptación se le aplica hashing
 	  //algoritmo MD5
-	  MD5CryptoServiceProvider hashmd5 =
+	  MD5CryptoServiceProvider? hashmd5 =
 	  new MD5CryptoServiceProvider();
 
 	  keyArray = hashmd5.ComputeHash(
@@ -341,9 +336,9 @@ namespace DaltORM
 
 	public static string GetMD5(string str)
 	{
-	  MD5 md5 = MD5CryptoServiceProvider.Create();
+	  MD5? md5 = MD5CryptoServiceProvider.Create();
 	  ASCIIEncoding encoding = new ASCIIEncoding();
-	  byte[] stream = null;
+	  byte[]? stream = null;
 	  StringBuilder sb = new StringBuilder();
 	  stream = md5.ComputeHash(encoding.GetBytes(str));
 	  for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);

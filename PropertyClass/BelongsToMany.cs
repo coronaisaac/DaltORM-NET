@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaltORM.PropertyClass
+namespace Dalton.Utility.Global.DaltORM.PropertyClass
 {
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
   public class BelongsToMany : Attribute

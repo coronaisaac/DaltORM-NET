@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Linq.Expressions;
 
-namespace DaltORM.Class
+namespace Dalton.Utility.Global.DaltORM.Class
 {
-  public class Where<T> : Database
+    public class Where<T> : Database
   {
     private string _Statement1;
     private string _Statement2;

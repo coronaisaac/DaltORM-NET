@@ -1,0 +1,15 @@
+G:\.NET\Library\DaltORM\bin\Release\net7.0\DaltORM.deps.json
+G:\.NET\Library\DaltORM\bin\Release\net7.0\DaltORM.dll
+G:\.NET\Library\DaltORM\bin\Release\net7.0\DaltORM.pdb
+G:\.NET\Library\DaltORM\bin\Release\net7.0\FirebirdSql.Data.FirebirdClient.dll
+G:\.NET\Library\DaltORM\bin\Release\net7.0\MySql.Data.dll
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.csproj.AssemblyReference.cache
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.GeneratedMSBuildEditorConfig.editorconfig
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.AssemblyInfoInputs.cache
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.AssemblyInfo.cs
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.csproj.CoreCompileInputs.cache
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.csproj.CopyComplete
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.dll
+G:\.NET\Library\DaltORM\obj\Release\net7.0\refint\DaltORM.dll
+G:\.NET\Library\DaltORM\obj\Release\net7.0\DaltORM.pdb
+G:\.NET\Library\DaltORM\obj\Release\net7.0\ref\DaltORM.dll
